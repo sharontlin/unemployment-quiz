@@ -9,14 +9,6 @@ Quiz.prototype.getQuestionIndex = function() {
     return this.questions[this.questionIndex];
 }
 
-Quiz.prototype.getQuestionIndexNum = function() {
-    return this.questionIndex;
-}
-
-Quiz.prototype.getQuestionIndexLen = function() {
-    return this.questions.length;
-}
-
 Quiz.prototype.guess = function(answer, lang = "en") {
     if(this.getQuestionIndex().isCorrectAnswer(answer)) {
         if(lang === "en") {
@@ -64,13 +56,13 @@ function populate(lang = "en", type="not-covid") {
         if (type === "covid") {
             if (lang === "en"){
                 notQualified(); 
-            } else {
+            } else if (lang === "vi") {
                 notQualified("vi"); 
             }
         } else {
             if (lang === "en"){
                 qualified(); 
-            } else {
+            } else if (lang === "vi") {
                 qualified("vi"); 
             }
         }
@@ -87,13 +79,13 @@ function populate(lang = "en", type="not-covid") {
             if (type === "covid") {
                 if (lang === "en"){
                     guess("btn" + i, choices[i], "en", "covid");
-                } else {
+                } else if (lang === "vi") {
                     guess("btn" + i, choices[i], "vi", "covid");
                 } 
             } else {
                 if (lang === "en"){
                     guess("btn" + i, choices[i], "en", "not-covid");
-                } else {
+                } else if (lang === "vi") {
                     guess("btn" + i, choices[i], "vi", "not-covid");
                 } 
             }
@@ -109,7 +101,7 @@ function guess(id, guess, lang="en", type="not-covid") {
             if (lang === "en"){
                 quiz.guess(guess, "en", "covid");
                 populate("en", "covid");
-            } else {
+            } else if (lang === "vi") {
                 quiz.guess(guess,"vi", "covid");
                 populate("vi", "covid");  
             }
@@ -117,7 +109,7 @@ function guess(id, guess, lang="en", type="not-covid") {
             if (lang === "en"){
                 quiz.guess(guess, "en", "not-covid");
                 populate("en", "not-covid");
-            } else {
+            } else if (lang === "vi") {
                 quiz.guess(guess,"vi", "not-covid");
                 populate("vi", "not-covid");  
             }
@@ -126,176 +118,176 @@ function guess(id, guess, lang="en", type="not-covid") {
     }
 };
 
-function redoQuiz(state="NY") {
+function redoQuiz(lang="en", state="NY", ) {
     var element = document.getElementById("quiz");
-    element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
 
-    switch(state) {
-        case "AL":
-            quiz = new Quiz(al);
-            break;
-        case "AK":
-            quiz = new Quiz(ak);
-            break;
-        case "AZ":
-            quiz = new Quiz(az);
-            break;
-        case "AR":
-            quiz = new Quiz(ar);
-            break;
-        case "CA":
-            quiz = new Quiz(ca);
-            break;
-        case "CO":
-            quiz = new Quiz(co);
-            break;
-        case "CT":
-            quiz = new Quiz(ct);
-            break;
-        case "DE":
-            quiz = new Quiz(de);
-            break;
-        case "DC":
-            quiz = new Quiz(dc);
-            break;
-        case "FL":
-            quiz = new Quiz(fl);
-            break
-        case "GA":
-            quiz = new Quiz(ga);
-            break;
-        case "HI":
-            quiz = new Quiz(hi);
-            break;
-        case "ID":
-            quiz = new Quiz(id);
-            break;
-        case "IL":
-            quiz = new Quiz(il);
-            break;
-        case "IN":
-            quiz = new Quiz(ind);
-            break;
-        case "IA":
-            quiz = new Quiz(ia);
-            break;
-        case "KS":
-            quiz = new Quiz(ks);
-            break;
-        case "KY":
-            quiz = new Quiz(ky);
-            break;
-        case "LA":
-            quiz = new Quiz(la);
-            break;
-        case "ME":
-            quiz = new Quiz(me);
-            break;
-        case "MD":
-            quiz = new Quiz(md);
-            break;
-        case "MA":
-            quiz = new Quiz(ma);
-            break;
-        case "MI":
-            quiz = new Quiz(mi);
-            break;
-        case "MN":
-            quiz = new Quiz(mn);
-            break;
-        case "MS":
-            quiz = new Quiz(ms);
-            break;
-        case "MO":
-            quiz = new Quiz(mo);
-            break;
-        case "MT":
-            quiz = new Quiz(mt);
-            break;
-        case "NE":
-            quiz = new Quiz(ne);
-            break
-        case "NV":
-            quiz = new Quiz(nv);
-            break;
-        case "NH":
-            quiz = new Quiz(nh);
-            break;
-        case "NJ":
-            quiz = new Quiz(nj);
-            break;
-        case "NM":
-            quiz = new Quiz(nm);
-            break;
-        case "NY":
-            quiz = new Quiz(ny);
-            break;
-        case "NC":
-            quiz = new Quiz(nc);
-            break;
-        case "ND":
-            quiz = new Quiz(nd);
-            break;
-        case "OH":
-            quiz = new Quiz(oh);
-            break;
-        case "OK":
-            quiz = new Quiz(ok);
-            break;        
-        case "OR":
-            quiz = new Quiz(or);
-            break;
-        case "PA":
-            quiz = new Quiz(pa);
-            break;
-        case "RI":
-            quiz = new Quiz(ri);
-            break;
-        case "SC":
-            quiz = new Quiz(sc);
-            break;
-        case "SD":
-            quiz = new Quiz(sd);
-            break;
-        case "TN":
-            quiz = new Quiz(tn);
-            break;
-        case "TX":
-            quiz = new Quiz(tx);
-            break
-        case "UT":
-            quiz = new Quiz(ut);
-            break;
-        case "VT":
-            quiz = new Quiz(vt);
-            break;
-        case "VA":
-            quiz = new Quiz(va);
-            break;
-        case "WA":
-            quiz = new Quiz(wa);
-            break;
-        case "WV":
-            quiz = new Quiz(wv);
-            break;
-        case "WI":
-            quiz = new Quiz(wi);
-            break;
-        case "WY":
-            quiz = new Quiz(wy);
-            break;
-        default:
-            quiz = new Quiz(nj);
-      } 
+    if (lang === "en") {
+        element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
 
-    populate("en", "not-covid");
-}
+        switch(state) {
+            case "AL":
+                quiz = new Quiz(al);
+                break;
+            case "AK":
+                quiz = new Quiz(ak);
+                break;
+            case "AZ":
+                quiz = new Quiz(az);
+                break;
+            case "AR":
+                quiz = new Quiz(ar);
+                break;
+            case "CA":
+                quiz = new Quiz(ca);
+                break;
+            case "CO":
+                quiz = new Quiz(co);
+                break;
+            case "CT":
+                quiz = new Quiz(ct);
+                break;
+            case "DE":
+                quiz = new Quiz(de);
+                break;
+            case "DC":
+                quiz = new Quiz(dc);
+                break;
+            case "FL":
+                quiz = new Quiz(fl);
+                break
+            case "GA":
+                quiz = new Quiz(ga);
+                break;
+            case "HI":
+                quiz = new Quiz(hi);
+                break;
+            case "ID":
+                quiz = new Quiz(id);
+                break;
+            case "IL":
+                quiz = new Quiz(il);
+                break;
+            case "IN":
+                quiz = new Quiz(ind);
+                break;
+            case "IA":
+                quiz = new Quiz(ia);
+                break;
+            case "KS":
+                quiz = new Quiz(ks);
+                break;
+            case "KY":
+                quiz = new Quiz(ky);
+                break;
+            case "LA":
+                quiz = new Quiz(la);
+                break;
+            case "ME":
+                quiz = new Quiz(me);
+                break;
+            case "MD":
+                quiz = new Quiz(md);
+                break;
+            case "MA":
+                quiz = new Quiz(ma);
+                break;
+            case "MI":
+                quiz = new Quiz(mi);
+                break;
+            case "MN":
+                quiz = new Quiz(mn);
+                break;
+            case "MS":
+                quiz = new Quiz(ms);
+                break;
+            case "MO":
+                quiz = new Quiz(mo);
+                break;
+            case "MT":
+                quiz = new Quiz(mt);
+                break;
+            case "NE":
+                quiz = new Quiz(ne);
+                break
+            case "NV":
+                quiz = new Quiz(nv);
+                break;
+            case "NH":
+                quiz = new Quiz(nh);
+                break;
+            case "NJ":
+                quiz = new Quiz(nj);
+                break;
+            case "NM":
+                quiz = new Quiz(nm);
+                break;
+            case "NY":
+                quiz = new Quiz(ny);
+                break;
+            case "NC":
+                quiz = new Quiz(nc);
+                break;
+            case "ND":
+                quiz = new Quiz(nd);
+                break;
+            case "OH":
+                quiz = new Quiz(oh);
+                break;
+            case "OK":
+                quiz = new Quiz(ok);
+                break;        
+            case "OR":
+                quiz = new Quiz(or);
+                break;
+            case "PA":
+                quiz = new Quiz(pa);
+                break;
+            case "RI":
+                quiz = new Quiz(ri);
+                break;
+            case "SC":
+                quiz = new Quiz(sc);
+                break;
+            case "SD":
+                quiz = new Quiz(sd);
+                break;
+            case "TN":
+                quiz = new Quiz(tn);
+                break;
+            case "TX":
+                quiz = new Quiz(tx);
+                break
+            case "UT":
+                quiz = new Quiz(ut);
+                break;
+            case "VT":
+                quiz = new Quiz(vt);
+                break;
+            case "VA":
+                quiz = new Quiz(va);
+                break;
+            case "WA":
+                quiz = new Quiz(wa);
+                break;
+            case "WV":
+                quiz = new Quiz(wv);
+                break;
+            case "WI":
+                quiz = new Quiz(wi);
+                break;
+            case "WY":
+                quiz = new Quiz(wy);
+                break;
+            default:
+                quiz = new Quiz(nj);
+        } 
 
-function redoQuizViet() {
-    var element = document.getElementById("quiz");
-    element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
-    quiz = new Quiz(baseViet);
-    populate("vi", "not-covid");
+        populate("en", "not-covid");
+    } else if (lang === "vi") {
+        element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
+        uiz = new Quiz(baseViet);
+        populate("vi", "not-covid");
+    }
 }
 
 function getStarted() {
@@ -312,8 +304,8 @@ function chooseQuiz(lang="en") {
     var element = document.getElementById("quiz");
     if(lang==="en"){
         element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\">Are you seeking relief from COVID-19?</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"covidQuiz();\"><span id=\"choice0\">Yes</span></button><button id=\"btn1\" onclick=\"chooseState();\"><span id=\"choice1\">No</span></button></div>";
-    } else {
-        element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\">Bạn đang tìm kiếm sự cứu trợ từ COVID-19?</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"covidQuiz('vi');\"><span id=\"choice0\">Đúng</span></button><button id=\"btn1\" onclick=\"redoQuizViet();\"><span id=\"choice1\">Không</span></button></div>";
+    } else if (lang === "vi") {
+        element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\">Bạn đang tìm kiếm sự cứu trợ từ COVID-19?</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"covidQuiz('vi');\"><span id=\"choice0\">Đúng</span></button><button id=\"btn1\" onclick=\"redoQuiz('vi');\"><span id=\"choice1\">Không</span></button></div>";
     }
 }
 
@@ -323,7 +315,7 @@ function covidQuiz(lang="en") {
         element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
         quiz = new Quiz(covid19);
         populate("en", "covid");
-    } else {
+    } else if (lang === "vi") {
         element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
         quiz = new Quiz(covid19Viet);
         populate("vi", "covid");
@@ -336,7 +328,7 @@ function chooseState() {
     var buttons = ''
     
     for (var i = 0; i < states.length; i++) {
-        buttons += "<button id=\"btn0\" onclick=\"redoQuiz('" + states[i] + "');\"><span id=\"choice1\">" + states[i] + "</span></button>";
+        buttons += "<button id=\"btn0\" onclick=\"redoQuiz('en', '" + states[i] + "');\"><span id=\"choice1\">" + states[i] + "</span></button>";
     }
 
     element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\">Select your state</p><div class=\"buttons\">" + buttons + "</div>";
@@ -346,7 +338,7 @@ function results(title, text,lang="en") {
     var gameOverHTML = "<h1>"+title+"</h1>";
     if(lang==="en"){
         gameOverHTML += "<h2 id='score'> "+text+"</h2> <div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
-    } else {
+    } else if (lang === "vi") {
         gameOverHTML += "<h2 id='score'> "+text+"</h2> <div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
     }
     var element = document.getElementById("quiz");
@@ -357,7 +349,7 @@ function notQualified(lang="en") {
     if(lang==="en"){
         var gameOverHTML = "<h1>Not Qualified</h1>";
         gameOverHTML += "<h2 id='score'>Unfortunately, you are not qualified to receive unemployment benefits in your state.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
-    } else {
+    } else if (lang === "vi") {
         var gameOverHTML = "<h1>Không chất lượng</h1>";
         gameOverHTML += "<h2 id='score'>Thật không may, bạn không đủ điều kiện để nhận trợ cấp thất nghiệp trong tiểu bang của bạn.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
     }
@@ -369,13 +361,19 @@ function qualified(lang="en") {
     if(lang==="en"){
         var gameOverHTML = "<h1>Qualified</h1>";
         gameOverHTML += "<h2 id='score'>You are qualified to receive unemployment benefits in your state. Apply with your local [<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>].</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
-    } else {
+    } else if (lang === "vi") {
         var gameOverHTML = "<h1>Đủ tiêu chuẩn</h1>";
         gameOverHTML += "<h2 id='score'>Bạn không đủ điều kiện để nhận trợ cấp thất nghiệp trong tiểu bang của bạn. Áp dụng với địa phương của bạn<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
     }
     var element = document.getElementById("quiz");
     element.innerHTML = gameOverHTML;
 };
+
+/*
+/
+/ Viet questions
+/
+*/
 
 
 var covid19Viet = [
@@ -390,6 +388,12 @@ var baseViet = [
     new Question("Bạn đang tích cực tìm kiếm việc làm và bạn có sẵn sàng cho công việc?", ["Đúng", "Không"], "Đúng", "Không chất lượng", "Bạn phải tìm kiếm việc làm để đủ điều kiện nhận trợ cấp thất nghiệp."),
     new Question("Trong vòng 4 của 5 quí vừa qua, anh/chị có kiếm được nhiều hơn $10,000 đôla không?", ["Đúng", "Không"], "Không", "Không chất lượng", "Nếu bạn không đáp ứng yêu cầu thu nhập tối thiểu, bạn không đủ điều kiện nhận trợ cấp thất nghiệp."),
     ];
+
+/*
+/
+/ English questions
+/
+*/
 
 var covid19 = [
     new Question("Did your employer cease operations due to COVID-19?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the national coronavirus relief act. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a>]."),
@@ -489,9 +493,7 @@ ne[2] = new Question("Did you make at least $4246 during the base period, with a
 nv[2] = new Question("Did you make at least $400 in your highest paid quarter of the base period with total earnings at least 1.5x your earnings in the highest quarter or earning wages in at least three of the quarters? Your base period is defined as the earliest four of the five complete calendar quarters before you filed your benefits claim.", ["Yes", "No"], "No", "Not Qualified", "If you do not meet the minimum earnings requirement, you do not qualify for unemployment benefits.")
 nh[2] = new Question("Did you earn at least $2800 in the base period and at least $1400 in each of two quarters? Your base period is defined as the earliest four of the five complete calendar quarters before you filed your benefits claim.", ["Yes", "No"], "No", "Not Qualified", "If you do not meet the minimum earnings requirement, you do not qualify for unemployment benefits.")
 nm[2] = new Question("Did you make at least $2089 during the base period, earning wages in at least two quarters? Your base period is defined as the earliest four of the five complete calendar quarters before you filed your benefits claim.", ["Yes", "No"], "No", "Not Qualified", "If you do not meet the minimum earnings requirement, you do not qualify for unemployment benefits.")
-
-// Skipping nj because it is used for the base
-
+nj[2] = new Question("Do you meet the minimum earnings requirement of $10k during (a) your regular base year period (first four of the last five completed calendar quarters) or $200/week for 20 weeks, (b) the four most recently completed calendar quarters preceding the date of the claim, or (c) the three most recently completed calendar quarters preceding the date of claim, and weeks and wages in the filing quarter up to your last day of work?", ["Yes", "No"], "No", "Not Qualified", "If you don't meet the minimum earnings requirement, you do not qualify for unemployment benefits.")
 ny[2] = new Question("Did you earn wages in at leaset two quarters with at least $2600 in one quarter, making over 1.5x the wage of your highest quarter? Your base period is defined as the earliest four of the five complete calendar quarters before you filed your benefits claim.", ["Yes", "No"], "No", "Not Qualified", "If you do not meet the minimum earnings requirement, you do not qualify for unemployment benefits.")
 nc[2] = new Question("Did you earn wages in at least two quarters and earn at least $780 in one of the last two quarters of the base period? Your base period is defined as the earliest four of the five complete calendar quarters before you filed your benefits claim.", ["Yes", "No"], "No", "Not Qualified", "If you do not meet the minimum earnings requirement, you do not qualify for unemployment benefits.")
 nd[2] = new Question("Did you earn wages in at least two quarters and 1.5x your wages in the highest paid quarter of the base period? Your base period is defined as the earliest four of the five complete calendar quarters before you filed your benefits claim.", ["Yes", "No"], "No", "Not Qualified", "If you do not meet the minimum earnings requirement, you do not qualify for unemployment benefits.")
