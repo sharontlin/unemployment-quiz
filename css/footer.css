@@ -39,3 +39,9 @@ a:visited{
 	padding-left: 20% !important;
 	text-decoration: none;
 }
+
+@media screen and (max-width: 740px) {
+    .footer-box {
+    	flex-direction: column;
+    }
+}
