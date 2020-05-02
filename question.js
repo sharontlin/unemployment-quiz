@@ -50,6 +50,22 @@ Question.prototype.getTitle = function() {
 Question.prototype.getText = function() {
     return this.descr;
 }
+
+/*
+/
+/ Populating the quiz
+/
+*/
+
+function getStarted() {
+    var element = document.getElementById("quiz");
+    element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\" onclick=\"chooseLanguage()\">Get Started</div>";
+}
+
+function chooseLanguage() {
+    var element = document.getElementById("quiz");
+    element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\">Select your language</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"chooseQuiz();\"><span id=\"choice0\">English</span></button><button id=\"btn1\" onclick=\"chooseQuiz('vi');\"><span id=\"choice1\">Tiếng Việt</span></button></div>";
+}
  
 function populate(lang = "en", type="not-covid") {
     if(quiz.isEnded()) {
@@ -98,235 +114,253 @@ function guess(id, guess, lang="en", type="not-covid") {
     var button = document.getElementById(id);
     button.onclick = function() {
         if (type === "covid") {
-            if (lang === "en"){
-                quiz.guess(guess, "en", "covid");
-                populate("en", "covid");
-            } else if (lang === "vi") {
-                quiz.guess(guess,"vi", "covid");
-                populate("vi", "covid");  
+            switch(lang) {
+                case "en":
+                    quiz.guess(guess, "en", "covid");
+                    populate("en", "covid");                    
+                    break;
+                case "vi":
+                    quiz.guess(guess,"vi", "covid");
+                    populate("vi", "covid");                      
+                    break;
+                default:
+                    quiz.guess(guess, "en", "covid");
+                    populate("en", "covid");            
             }
         } else {
-            if (lang === "en"){
-                quiz.guess(guess, "en", "not-covid");
-                populate("en", "not-covid");
-            } else if (lang === "vi") {
-                quiz.guess(guess,"vi", "not-covid");
-                populate("vi", "not-covid");  
+            switch(lang) {
+                case "en":
+                    quiz.guess(guess, "en", "not-covid");
+                    populate("en", "not-covid");                    
+                    break;
+                case "vi":
+                    quiz.guess(guess,"vi", "not-covid");
+                    populate("vi", "not-covid");                      
+                    break;
+                default:
+                    quiz.guess(guess, "en", "not-covid");
+                    populate("en", "not-covid");           
             }
         }
         
     }
 };
 
-function redoQuiz(lang="en", state="NY", ) {
+function chooseQuiz(lang="en") {
     var element = document.getElementById("quiz");
-
-    if (lang === "en") {
-        element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
-
-        switch(state) {
-            case "AL":
-                quiz = new Quiz(al);
-                break;
-            case "AK":
-                quiz = new Quiz(ak);
-                break;
-            case "AZ":
-                quiz = new Quiz(az);
-                break;
-            case "AR":
-                quiz = new Quiz(ar);
-                break;
-            case "CA":
-                quiz = new Quiz(ca);
-                break;
-            case "CO":
-                quiz = new Quiz(co);
-                break;
-            case "CT":
-                quiz = new Quiz(ct);
-                break;
-            case "DE":
-                quiz = new Quiz(de);
-                break;
-            case "DC":
-                quiz = new Quiz(dc);
-                break;
-            case "FL":
-                quiz = new Quiz(fl);
-                break
-            case "GA":
-                quiz = new Quiz(ga);
-                break;
-            case "HI":
-                quiz = new Quiz(hi);
-                break;
-            case "ID":
-                quiz = new Quiz(id);
-                break;
-            case "IL":
-                quiz = new Quiz(il);
-                break;
-            case "IN":
-                quiz = new Quiz(ind);
-                break;
-            case "IA":
-                quiz = new Quiz(ia);
-                break;
-            case "KS":
-                quiz = new Quiz(ks);
-                break;
-            case "KY":
-                quiz = new Quiz(ky);
-                break;
-            case "LA":
-                quiz = new Quiz(la);
-                break;
-            case "ME":
-                quiz = new Quiz(me);
-                break;
-            case "MD":
-                quiz = new Quiz(md);
-                break;
-            case "MA":
-                quiz = new Quiz(ma);
-                break;
-            case "MI":
-                quiz = new Quiz(mi);
-                break;
-            case "MN":
-                quiz = new Quiz(mn);
-                break;
-            case "MS":
-                quiz = new Quiz(ms);
-                break;
-            case "MO":
-                quiz = new Quiz(mo);
-                break;
-            case "MT":
-                quiz = new Quiz(mt);
-                break;
-            case "NE":
-                quiz = new Quiz(ne);
-                break
-            case "NV":
-                quiz = new Quiz(nv);
-                break;
-            case "NH":
-                quiz = new Quiz(nh);
-                break;
-            case "NJ":
-                quiz = new Quiz(nj);
-                break;
-            case "NM":
-                quiz = new Quiz(nm);
-                break;
-            case "NY":
-                quiz = new Quiz(ny);
-                break;
-            case "NC":
-                quiz = new Quiz(nc);
-                break;
-            case "ND":
-                quiz = new Quiz(nd);
-                break;
-            case "OH":
-                quiz = new Quiz(oh);
-                break;
-            case "OK":
-                quiz = new Quiz(ok);
-                break;        
-            case "OR":
-                quiz = new Quiz(or);
-                break;
-            case "PA":
-                quiz = new Quiz(pa);
-                break;
-            case "RI":
-                quiz = new Quiz(ri);
-                break;
-            case "SC":
-                quiz = new Quiz(sc);
-                break;
-            case "SD":
-                quiz = new Quiz(sd);
-                break;
-            case "TN":
-                quiz = new Quiz(tn);
-                break;
-            case "TX":
-                quiz = new Quiz(tx);
-                break
-            case "UT":
-                quiz = new Quiz(ut);
-                break;
-            case "VT":
-                quiz = new Quiz(vt);
-                break;
-            case "VA":
-                quiz = new Quiz(va);
-                break;
-            case "WA":
-                quiz = new Quiz(wa);
-                break;
-            case "WV":
-                quiz = new Quiz(wv);
-                break;
-            case "WI":
-                quiz = new Quiz(wi);
-                break;
-            case "WY":
-                quiz = new Quiz(wy);
-                break;
-            default:
-                quiz = new Quiz(nj);
-        } 
-
-        populate("en", "not-covid");
-    } else if (lang === "vi") {
-        element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
-        uiz = new Quiz(baseViet);
-        populate("vi", "not-covid");
+    switch(lang) {
+        case "en":
+            element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\">Are you seeking relief from COVID-19?</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"covidQuiz();\"><span id=\"choice0\">Yes</span></button><button id=\"btn1\" onclick=\"chooseState();\"><span id=\"choice1\">No</span></button></div>";
+            break;
+        case "vi":
+            element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\">Bạn đang tìm kiếm sự cứu trợ từ COVID-19?</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"covidQuiz('vi');\"><span id=\"choice0\">Đúng</span></button><button id=\"btn1\" onclick=\"redoQuiz('vi');\"><span id=\"choice1\">Không</span></button></div>";
+            break;
+        default:
+            element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\">Are you seeking relief from COVID-19?</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"covidQuiz();\"><span id=\"choice0\">Yes</span></button><button id=\"btn1\" onclick=\"chooseState();\"><span id=\"choice1\">No</span></button></div>";
     }
 }
 
-function getStarted() {
+function redoQuiz(lang="en", state="NY", ) {
     var element = document.getElementById("quiz");
-    element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\" onclick=\"chooseLanguage()\">Get Started</div>";
-}
 
-function chooseLanguage() {
-    var element = document.getElementById("quiz");
-    element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\">Select your language</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"chooseQuiz();\"><span id=\"choice0\">English</span></button><button id=\"btn1\" onclick=\"chooseQuiz('vi');\"><span id=\"choice1\">Tiếng Việt</span></button></div>";
-}
+    switch(lang) {
+        case "en":
+            element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
 
-function chooseQuiz(lang="en") {
-    var element = document.getElementById("quiz");
-    if(lang==="en"){
-        element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\">Are you seeking relief from COVID-19?</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"covidQuiz();\"><span id=\"choice0\">Yes</span></button><button id=\"btn1\" onclick=\"chooseState();\"><span id=\"choice1\">No</span></button></div>";
-    } else if (lang === "vi") {
-        element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\">Bạn đang tìm kiếm sự cứu trợ từ COVID-19?</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"covidQuiz('vi');\"><span id=\"choice0\">Đúng</span></button><button id=\"btn1\" onclick=\"redoQuiz('vi');\"><span id=\"choice1\">Không</span></button></div>";
+            switch(state) {
+                case "AL":
+                    quiz = new Quiz(al);
+                    break;
+                case "AK":
+                    quiz = new Quiz(ak);
+                    break;
+                case "AZ":
+                    quiz = new Quiz(az);
+                    break;
+                case "AR":
+                    quiz = new Quiz(ar);
+                    break;
+                case "CA":
+                    quiz = new Quiz(ca);
+                    break;
+                case "CO":
+                    quiz = new Quiz(co);
+                    break;
+                case "CT":
+                    quiz = new Quiz(ct);
+                    break;
+                case "DE":
+                    quiz = new Quiz(de);
+                    break;
+                case "DC":
+                    quiz = new Quiz(dc);
+                    break;
+                case "FL":
+                    quiz = new Quiz(fl);
+                    break
+                case "GA":
+                    quiz = new Quiz(ga);
+                    break;
+                case "HI":
+                    quiz = new Quiz(hi);
+                    break;
+                case "ID":
+                    quiz = new Quiz(id);
+                    break;
+                case "IL":
+                    quiz = new Quiz(il);
+                    break;
+                case "IN":
+                    quiz = new Quiz(ind);
+                    break;
+                case "IA":
+                    quiz = new Quiz(ia);
+                    break;
+                case "KS":
+                    quiz = new Quiz(ks);
+                    break;
+                case "KY":
+                    quiz = new Quiz(ky);
+                    break;
+                case "LA":
+                    quiz = new Quiz(la);
+                    break;
+                case "ME":
+                    quiz = new Quiz(me);
+                    break;
+                case "MD":
+                    quiz = new Quiz(md);
+                    break;
+                case "MA":
+                    quiz = new Quiz(ma);
+                    break;
+                case "MI":
+                    quiz = new Quiz(mi);
+                    break;
+                case "MN":
+                    quiz = new Quiz(mn);
+                    break;
+                case "MS":
+                    quiz = new Quiz(ms);
+                    break;
+                case "MO":
+                    quiz = new Quiz(mo);
+                    break;
+                case "MT":
+                    quiz = new Quiz(mt);
+                    break;
+                case "NE":
+                    quiz = new Quiz(ne);
+                    break
+                case "NV":
+                    quiz = new Quiz(nv);
+                    break;
+                case "NH":
+                    quiz = new Quiz(nh);
+                    break;
+                case "NJ":
+                    quiz = new Quiz(nj);
+                    break;
+                case "NM":
+                    quiz = new Quiz(nm);
+                    break;
+                case "NY":
+                    quiz = new Quiz(ny);
+                    break;
+                case "NC":
+                    quiz = new Quiz(nc);
+                    break;
+                case "ND":
+                    quiz = new Quiz(nd);
+                    break;
+                case "OH":
+                    quiz = new Quiz(oh);
+                    break;
+                case "OK":
+                    quiz = new Quiz(ok);
+                    break;        
+                case "OR":
+                    quiz = new Quiz(or);
+                    break;
+                case "PA":
+                    quiz = new Quiz(pa);
+                    break;
+                case "RI":
+                    quiz = new Quiz(ri);
+                    break;
+                case "SC":
+                    quiz = new Quiz(sc);
+                    break;
+                case "SD":
+                    quiz = new Quiz(sd);
+                    break;
+                case "TN":
+                    quiz = new Quiz(tn);
+                    break;
+                case "TX":
+                    quiz = new Quiz(tx);
+                    break
+                case "UT":
+                    quiz = new Quiz(ut);
+                    break;
+                case "VT":
+                    quiz = new Quiz(vt);
+                    break;
+                case "VA":
+                    quiz = new Quiz(va);
+                    break;
+                case "WA":
+                    quiz = new Quiz(wa);
+                    break;
+                case "WV":
+                    quiz = new Quiz(wv);
+                    break;
+                case "WI":
+                    quiz = new Quiz(wi);
+                    break;
+                case "WY":
+                    quiz = new Quiz(wy);
+                    break;
+                default:
+                    quiz = new Quiz(nj);
+            } 
+            populate("en", "not-covid");
+            break;
+        case "vi":
+            element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
+            uiz = new Quiz(baseViet);
+            populate("vi", "not-covid");
+            break;
+        default:
+            element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
+            uiz = new Quiz(baseViet);
+            populate("vi", "not-covid");
     }
 }
 
 function covidQuiz(lang="en") {
     var element = document.getElementById("quiz");
-    if(lang==="en"){
-        element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
-        quiz = new Quiz(covid19);
-        populate("en", "covid");
-    } else if (lang === "vi") {
-        element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
-        quiz = new Quiz(covid19Viet);
-        populate("vi", "covid");
+    switch(lang) {
+        case "en":
+            element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
+            quiz = new Quiz(covid19);
+            populate("en", "covid");
+            break;
+        case "vi":
+            element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
+            quiz = new Quiz(covid19Viet);
+            populate("vi", "covid");
+            break;
+        default:
+            element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
+            quiz = new Quiz(covid19);
+            populate("en", "covid");
     }
 }
 
 function chooseState() {
     var element = document.getElementById("quiz");
-
     var buttons = ''
-    
     for (var i = 0; i < states.length; i++) {
         buttons += "<button id=\"btn0\" onclick=\"redoQuiz('en', '" + states[i] + "');\"><span id=\"choice1\">" + states[i] + "</span></button>";
     }
@@ -336,34 +370,51 @@ function chooseState() {
  
 function results(title, text,lang="en") {
     var gameOverHTML = "<h1>"+title+"</h1>";
-    if(lang==="en"){
-        gameOverHTML += "<h2 id='score'> "+text+"</h2> <div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
-    } else if (lang === "vi") {
-        gameOverHTML += "<h2 id='score'> "+text+"</h2> <div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
+    switch(lang) {
+        case "en":
+            gameOverHTML += "<h2 id='score'> "+text+"</h2> <div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
+            break;
+        case "vi":
+            gameOverHTML += "<h2 id='score'> "+text+"</h2> <div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
+            break;
+        default:
+            gameOverHTML += "<h2 id='score'> "+text+"</h2> <div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
     }
     var element = document.getElementById("quiz");
     element.innerHTML = gameOverHTML;
 };
 
 function notQualified(lang="en") {
-    if(lang==="en"){
-        var gameOverHTML = "<h1>Not Qualified</h1>";
-        gameOverHTML += "<h2 id='score'>Unfortunately, you are not qualified to receive unemployment benefits in your state.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
-    } else if (lang === "vi") {
-        var gameOverHTML = "<h1>Không chất lượng</h1>";
-        gameOverHTML += "<h2 id='score'>Thật không may, bạn không đủ điều kiện để nhận trợ cấp thất nghiệp trong tiểu bang của bạn.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
+    switch(lang) {
+        case "en":
+            var gameOverHTML = "<h1>Not Qualified</h1>";
+            gameOverHTML += "<h2 id='score'>Unfortunately, you are not qualified to receive unemployment benefits in your state.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
+            break;
+        case "vi":
+            var gameOverHTML = "<h1>Không chất lượng</h1>";
+            gameOverHTML += "<h2 id='score'>Thật không may, bạn không đủ điều kiện để nhận trợ cấp thất nghiệp trong tiểu bang của bạn.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
+            break;
+        default:
+            var gameOverHTML = "<h1>Not Qualified</h1>";
+            gameOverHTML += "<h2 id='score'>Unfortunately, you are not qualified to receive unemployment benefits in your state.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
     }
     var element = document.getElementById("quiz");
     element.innerHTML = gameOverHTML;
 };
 
 function qualified(lang="en") {
-    if(lang==="en"){
-        var gameOverHTML = "<h1>Qualified</h1>";
-        gameOverHTML += "<h2 id='score'>You are qualified to receive unemployment benefits in your state. Apply with your local [<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>].</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
-    } else if (lang === "vi") {
-        var gameOverHTML = "<h1>Đủ tiêu chuẩn</h1>";
-        gameOverHTML += "<h2 id='score'>Bạn không đủ điều kiện để nhận trợ cấp thất nghiệp trong tiểu bang của bạn. Áp dụng với địa phương của bạn<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
+    switch(lang) {
+        case "en":
+            var gameOverHTML = "<h1>Qualified</h1>";
+            gameOverHTML += "<h2 id='score'>You are qualified to receive unemployment benefits in your state. Apply with your local [<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>].</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
+            break;
+        case "vi":
+            var gameOverHTML = "<h1>Đủ tiêu chuẩn</h1>";
+            gameOverHTML += "<h2 id='score'>Bạn không đủ điều kiện để nhận trợ cấp thất nghiệp trong tiểu bang của bạn. Áp dụng với địa phương của bạn<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
+            break;
+        default:
+            var gameOverHTML = "<h1>Qualified</h1>";
+            gameOverHTML += "<h2 id='score'>You are qualified to receive unemployment benefits in your state. Apply with your local [<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>].</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
     }
     var element = document.getElementById("quiz");
     element.innerHTML = gameOverHTML;
