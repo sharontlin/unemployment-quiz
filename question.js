@@ -368,7 +368,7 @@ function notQualified(lang="en") {
 function qualified(lang="en") {
     if(lang==="en"){
         var gameOverHTML = "<h1>Qualified</h1>";
-        gameOverHTML += "<h2 id='score'>You are qualified to receive unemployment benefits in your state. Apply with your local <a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
+        gameOverHTML += "<h2 id='score'>You are qualified to receive unemployment benefits in your state. Apply with your local [<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>].</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
     } else {
         var gameOverHTML = "<h1>Đủ tiêu chuẩn</h1>";
         gameOverHTML += "<h2 id='score'>Bạn không đủ điều kiện để nhận trợ cấp thất nghiệp trong tiểu bang của bạn. Áp dụng với địa phương của bạn<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
@@ -392,10 +392,10 @@ var baseViet = [
     ];
 
 var covid19 = [
-    new Question("Did your employer cease operations due to COVID-19?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the national coronavirus releif act. You should apply for unemployment insurance."),
-    new Question("Did you stop working to quarantine and expect to work after quarantine is over?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the national coronavirus releif act. You should apply for unemployment insurance."),
-    new Question("Did you stop working due to risk of exposure or to care for a family member?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the national coronavirus releif act. You should apply for unemployment insurance."),
-    new Question("Did the breadwinner in your household die from COVID-19?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the national coronavirus releif act. You should apply for unemployment insurance."),
+    new Question("Did your employer cease operations due to COVID-19?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the national coronavirus relief act. You should apply for unemployment insurance."),
+    new Question("Did you stop working to quarantine and expect to work after quarantine is over?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the national coronavirus relief act. You should apply for unemployment insurance."),
+    new Question("Did you stop working due to risk of exposure or to care for a family member?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the national coronavirus relief act. You should apply for unemployment insurance."),
+    new Question("Did the breadwinner in your household die from COVID-19?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the national coronavirus relief act. You should apply for unemployment insurance."),
 ];
 
 var base = [

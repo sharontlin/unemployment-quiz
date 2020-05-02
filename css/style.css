@@ -3,6 +3,10 @@ body {
     background-color: #413D3D;
 }
 
+a {
+    color: darkslategrey;
+}
+
 .subpage {
     min-height: 100vh;
     display: flex;
