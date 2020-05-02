@@ -68,6 +68,10 @@ a {
     margin: 0px;
     padding: 32px;
 }
+
+#score a:link {
+    border-bottom: 1px dotted;
+}
  
 .grid #question {
     font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
