@@ -9,6 +9,14 @@ Quiz.prototype.getQuestionIndex = function() {
     return this.questions[this.questionIndex];
 }
 
+Quiz.prototype.getQuestionIndexNum = function() {
+    return this.questionIndex;
+}
+
+Quiz.prototype.getQuestionIndexLen = function() {
+    return this.questions.length;
+}
+
 Quiz.prototype.guess = function(answer, lang = "en") {
     if(this.getQuestionIndex().isCorrectAnswer(answer)) {
         if(lang === "en") {
@@ -22,6 +30,12 @@ Quiz.prototype.guess = function(answer, lang = "en") {
 }
  
 Quiz.prototype.isEnded = function() {
+    if (typeof(this.questions) === 'object') {
+        var arr = $.map(this.questions, function(value) {
+            return [value];
+        });
+        return this.questionIndex === arr.length;
+    }
     return this.questionIndex === this.questions.length;
 }
  
@@ -45,40 +59,70 @@ Question.prototype.getText = function() {
     return this.descr;
 }
  
-function populate(lang = "en") {
+function populate(lang = "en", type="not-covid") {
     if(quiz.isEnded()) {
-        if (lang === "en"){
-            notQualified(); 
+        if (type === "covid") {
+            if (lang === "en"){
+                notQualified(); 
+            } else {
+                notQualified("vi"); 
+            }
         } else {
-            notQualified("vi"); 
+            if (lang === "en"){
+                qualified(); 
+            } else {
+                qualified("vi"); 
+            }
         }
+        
     } else {
         var element = document.getElementById("question");
+
         element.innerHTML = quiz.getQuestionIndex().text;
         
         var choices = quiz.getQuestionIndex().choices;
         for(var i = 0; i < choices.length; i++) {
             var element = document.getElementById("choice" + i);
             element.innerHTML = choices[i];
-            if (lang === "en"){
-                guess("btn" + i, choices[i]);
+            if (type === "covid") {
+                if (lang === "en"){
+                    guess("btn" + i, choices[i], "en", "covid");
+                } else {
+                    guess("btn" + i, choices[i], "vi", "covid");
+                } 
             } else {
-                guess("btn" + i, choices[i], "vi");
-            } 
+                if (lang === "en"){
+                    guess("btn" + i, choices[i], "en", "not-covid");
+                } else {
+                    guess("btn" + i, choices[i], "vi", "not-covid");
+                } 
+            }
+            
         } 
     }
 };
  
-function guess(id, guess, lang="en") {
+function guess(id, guess, lang="en", type="not-covid") {
     var button = document.getElementById(id);
     button.onclick = function() {
-        if (lang === "en"){
-            quiz.guess(guess);
-            populate();
+        if (type === "covid") {
+            if (lang === "en"){
+                quiz.guess(guess, "en", "covid");
+                populate("en", "covid");
+            } else {
+                quiz.guess(guess,"vi", "covid");
+                populate("vi", "covid");  
+            }
         } else {
-            quiz.guess(guess,"vi");
-            populate("vi");  
+            if (lang === "en"){
+                quiz.guess(guess, "en", "not-covid");
+                populate("en", "not-covid");
+            } else {
+                quiz.guess(guess,"vi", "not-covid");
+                populate("vi", "not-covid");  
+            }
         }
+        
     }
 };
 
@@ -244,14 +288,14 @@ function redoQuiz(state="NY") {
             quiz = new Quiz(nj);
       } 
 
-    populate();
+    populate("en", "not-covid");
 }
 
 function redoQuizViet() {
     var element = document.getElementById("quiz");
     element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
     quiz = new Quiz(baseViet);
-    populate("vi");
+    populate("vi", "not-covid");
 }
 
 function getStarted() {
@@ -278,11 +322,11 @@ function covidQuiz(lang="en") {
     if(lang==="en"){
         element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
         quiz = new Quiz(covid19);
-        populate();
+        populate("en", "covid");
     } else {
         element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
         quiz = new Quiz(covid19Viet);
-        populate("vi");
+        populate("vi", "covid");
     }
 }
 
@@ -321,6 +365,19 @@ function notQualified(lang="en") {
     element.innerHTML = gameOverHTML;
 };
 
+function qualified(lang="en") {
+    if(lang==="en"){
+        var gameOverHTML = "<h1>Qualified</h1>";
+        gameOverHTML += "<h2 id='score'>You are qualified to receive unemployment benefits in your state. Apply with your local <a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
+    } else {
+        var gameOverHTML = "<h1>Đủ tiêu chuẩn</h1>";
+        gameOverHTML += "<h2 id='score'>Bạn không đủ điều kiện để nhận trợ cấp thất nghiệp trong tiểu bang của bạn. Áp dụng với địa phương của bạn<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
+    }
+    var element = document.getElementById("quiz");
+    element.innerHTML = gameOverHTML;
+};
+
+
 var covid19Viet = [
     new Question("Chỗ làm có cắt giảm giờ làm của anh/chị bởi ảnh hưởng của chính sách phòng chống Covid-19 không?", ["Đúng", "Không"], "Đúng", "Đủ tiêu chuẩn", "Bạn có thể đủ điều kiện để thất nghiệp theo đạo luật cứu trợ coronavirus quốc gia. Bạn nên đăng ký bảo hiểm thất nghiệp."),
     new Question("Anh/chị có tự cách ly vì Covid-19 và không thể đi làm không?", ["Đúng", "Không"], "Đúng", "Đủ tiêu chuẩn", "Bạn có thể đủ điều kiện để thất nghiệp theo đạo luật cứu trợ coronavirus quốc gia. Bạn nên đăng ký bảo hiểm thất nghiệp."),
@@ -344,7 +401,6 @@ var covid19 = [
 var base = [
     new Question("Did you involuntarily lose your job, not due to quitting or firing?", ["Yes", "No"], "No", "Not Qualified", "You will need to be reviewed by a claims examiner through a fact-finding interview. Your employer may also be contacted and the examineer will determine your eligibility."),
     new Question("Are you actively seeking employment and are you available for work?", ["Yes", "No"], "No", "Not Qualified", "You must be seeking employment in order to qualify for unemployment benefits."),
-    new Question("Do you meet the minimum earnings requirement of $10k during (a) your regular base year period (first four of the last five completed calendar quarters) or $200/week for 20 weeks, (b) the four most recently completed calendar quarters preceding the date of the claim, or (c) the three most recently completed calendar quarters preceding the date of claim, and weeks and wages in the filing quarter up to your last day of work?", ["Yes", "No"], "No", "Not Qualified", "If you don't meet the minimum earnings requirement, you do not qualify for unemployment benefits."),
     // new Question("Are you a teacher or school employee?", ["Yes", "No"], "Yes", "Maybe Qualified", "If you have a claimed filed curing a recess period, only school wages in the base period of the claim, or an offer to return to work for a school employer when the recess period ends, you may not be eligibile, although eligibility depends on your unique situation."),
     // new Question("Are you a corporate officer or business owner?", ["Yes", "No"], "Yes", "Maybe Qualified", "If you own more than a 5 percent equitable (you own more than 5% of the capital stock of the corporation, either by yourself or with your spouse) or debt interest and your claim is based on wages with the corproation, you will not be considered unemployed during your term of office or ownership."),
     // new Question("Are you self-employed, a part-time worker, or an independent contractor?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the national coronavirus releif act. You should apply for unemployment insurance."),
