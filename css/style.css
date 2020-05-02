@@ -85,6 +85,8 @@ a {
 
 .buttons button {
     margin: 8px 12px 8px 12px;
+    width: auto;
+    padding: 0px 32px;
 }
 
  
@@ -126,5 +128,11 @@ a {
     }
     #score {
         font-size: 24px;
+    }
+    .grid-container {
+        padding: 16px;
+    }
+    .buttons button {
+        width: ;
     }
 }
