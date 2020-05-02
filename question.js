@@ -20,6 +20,12 @@ Quiz.prototype.guess = function(answer, lang = "en") {
 
     this.questionIndex++;
 }
+
+ 
+Quiz.prototype.getQuestions = function() {
+    return this.questions;
+}
+
  
 Quiz.prototype.isEnded = function() {
     if (typeof(this.questions) === 'object') {
@@ -328,7 +334,7 @@ function redoQuiz(lang="en", state="NY", ) {
             break;
         case "vi":
             element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
-            uiz = new Quiz(baseViet);
+            quiz = new Quiz(baseViet);
             populate("vi", "not-covid");
             break;
         default:
