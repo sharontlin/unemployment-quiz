@@ -83,10 +83,10 @@ function chooseLanguage() {
         "<button id=\"btn2\" onclick=\"chooseQuiz('kor');\">" +
             "<span id=\"choice2\">한국어</span>" +
         "</button>" + 
-        "<button id=\"btn4\" onclick=\"chooseQuiz('ger');\">" +
+        "<button id=\"btn3\" onclick=\"chooseQuiz('ger');\">" +
             "<span id=\"choice3\">Deutsche</span>" +
         "</button>" + 
-        "<button id=\"btn3\" onclick=\"chooseQuiz('punj');\">" +
+        "<button id=\"btn4\" onclick=\"chooseQuiz('punj');\">" +
             "<span id=\"choice4\">ਪੰਜਾਬੀ</span>" +
         "</button>" + 
     "</div>";
@@ -171,6 +171,18 @@ function guess(id, guess, lang="en", type="not-covid") {
                 case "vi":
                     quiz.guess(guess,"vi", "covid");
                     populate("vi", "covid");                      
+                    break;
+                case "kor":
+                    quiz.guess(guess,"kor", "covid");
+                    populate("kor", "covid");                      
+                    break;
+                case "ger":
+                    quiz.guess(guess,"ger", "covid");
+                    populate("ger", "covid");                      
+                    break;
+                case "punj":
+                    quiz.guess(guess,"punj", "covid");
+                    populate("punj", "covid");                      
                     break;
                 default:
                     quiz.guess(guess, "en", "covid");
