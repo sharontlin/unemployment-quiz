@@ -70,7 +70,17 @@ function getStarted() {
 
 function chooseLanguage() {
     var element = document.getElementById("quiz");
-    element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\">Select your language</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"chooseQuiz();\"><span id=\"choice0\">English</span></button><button id=\"btn1\" onclick=\"chooseQuiz('vi');\"><span id=\"choice1\">Tiếng Việt</span></button></div>";
+    element.innerHTML = 
+    "<h1>Unemployment Qualification Test</h1>" +
+    "<p id=\"question\">Select your language</p>" + 
+    "<div class=\"buttons\">" + 
+        "<button id=\"btn0\" onclick=\"chooseQuiz();\">" +
+            "<span id=\"choice0\">English</span>" +
+        "</button>" +
+        "<button id=\"btn1\" onclick=\"chooseQuiz('vi');\">" + 
+            "<span id=\"choice1\">Tiếng Việt</span>" +
+        "</button>" +
+    "</div>";
 }
  
 function populate(lang = "en", type="not-covid") {
