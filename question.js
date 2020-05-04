@@ -13,8 +13,14 @@ Quiz.prototype.guess = function(answer, lang = "en") {
     if(this.getQuestionIndex().isCorrectAnswer(answer)) {
         if(lang === "en") {
             results(this.getQuestionIndex().getTitle(), this.getQuestionIndex().getText());
-        } else {
+        } else if (lang === "vi") {
             results(this.getQuestionIndex().getTitle(), this.getQuestionIndex().getText(), "vi");
+        } else if (lang === "kor") {
+            results(this.getQuestionIndex().getTitle(), this.getQuestionIndex().getText(), "kor");
+        } else if (lang === "ger") {
+            results(this.getQuestionIndex().getTitle(), this.getQuestionIndex().getText(), "ger");
+        } else if (lang === "punj") {
+            results(this.getQuestionIndex().getTitle(), this.getQuestionIndex().getText(), "punj");
         }
     }
 
