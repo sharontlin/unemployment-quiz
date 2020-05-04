@@ -80,6 +80,15 @@ function chooseLanguage() {
         "<button id=\"btn1\" onclick=\"chooseQuiz('vi');\">" + 
             "<span id=\"choice1\">Tiếng Việt</span>" +
         "</button>" +
+        "<button id=\"btn2\" onclick=\"chooseQuiz();\">" +
+            "<span id=\"choice2\">한국어</span>" +
+        "</button>" + 
+        "<button id=\"btn3\" onclick=\"chooseQuiz();\">" +
+            "<span id=\"choice3\">ਪੰਜਾਬੀ</span>" +
+        "</button>" + 
+        "<button id=\"btn4\" onclick=\"chooseQuiz();\">" +
+            "<span id=\"choice4\">Deutsche</span>" +
+        "</button>" + 
     "</div>";
 }
  
@@ -90,12 +99,24 @@ function populate(lang = "en", type="not-covid") {
                 notQualified(); 
             } else if (lang === "vi") {
                 notQualified("vi"); 
+            } else if (lang === "kor") {
+                notQualified("kor");
+            } else if (lang === "ger") {
+                notQualified("ger");
+            } else if (lang === "punj") {
+                notQualified("punj");
             }
         } else {
             if (lang === "en"){
                 qualified(); 
             } else if (lang === "vi") {
-                qualified("vi"); 
+                qualified("vi");
+            } else if (lang === "kor") {
+                qualified("kor");
+            } else if (lang === "ger") {
+                qualified("ger");
+            } else if (lang === "punj") {
+                notQualified("punj");
             }
         }
         
@@ -113,12 +134,24 @@ function populate(lang = "en", type="not-covid") {
                     guess("btn" + i, choices[i], "en", "covid");
                 } else if (lang === "vi") {
                     guess("btn" + i, choices[i], "vi", "covid");
-                } 
+                } else if (lang === "kor") {
+                    guess("btn" + i, choices[i], "kor", "covid")
+                } else if (lang === "ger") {
+                    guess("btn" + i, choices[i], "ger", "covid")
+                } else if (lang === "punj") {
+                    guess("btn" + i, choices[i], "punj", "covid")
+                }
             } else {
                 if (lang === "en"){
                     guess("btn" + i, choices[i], "en", "not-covid");
                 } else if (lang === "vi") {
                     guess("btn" + i, choices[i], "vi", "not-covid");
+                } else if (lang === "kor") {
+                    guess("btn" + i, choices[i], "kor", "not-covid");
+                } else if (lang === "ger") {
+                    guess("btn" + i, choices[i], "ger", "not-covid");
+                } else if (lang === "punj") {
+                    guess("btn" + i, choices[i], "punj", "not-covid");
                 } 
             }
             
@@ -153,6 +186,18 @@ function guess(id, guess, lang="en", type="not-covid") {
                     quiz.guess(guess,"vi", "not-covid");
                     populate("vi", "not-covid");                      
                     break;
+                case "kor":
+                    quiz.guess(guess,"kor", "not-covid");
+                    populate("kor", "not-covid");                      
+                    break;
+                case "ger":
+                    quiz.guess(guess,"ger", "not-covid");
+                    populate("ger", "not-covid");                      
+                    break;
+                case "punj":
+                    quiz.guess(guess,"punj", "not-covid");
+                    populate("punj", "not-covid");                      
+                    break;
                 default:
                     quiz.guess(guess, "en", "not-covid");
                     populate("en", "not-covid");           
@@ -170,6 +215,15 @@ function chooseQuiz(lang="en") {
             break;
         case "vi":
             element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\">Bạn đang tìm kiếm sự cứu trợ từ COVID-19?</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"covidQuiz('vi');\"><span id=\"choice0\">Đúng</span></button><button id=\"btn1\" onclick=\"redoQuiz('vi');\"><span id=\"choice1\">Không</span></button></div>";
+            break;
+        case "kor":
+            element.innerHTML = "<h1>실업수당 조건 시험</h1><p id=\"question\">COVID-19 으로 인한 피해에 대해 복지를 원하십니까?</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"covidQuiz('kor');\"><span id=\"choice0\">예</span></button><button id=\"btn1\" onclick=\"redoQuiz('kor');\"><span id=\"choice1\">아니요</span></button></div>";
+            break;
+        case "ger":
+            element.innerHTML = "<h1>Qualifikationsprüfung zur Arbeitslosigkeit</h1><p id=\"question\">Bemühen Sie sich um Erleichterung wegen der COVID-19-Pandemie?</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"covidQuiz('ger');\"><span id=\"choice0\">Ja</span></button><button id=\"btn1\" onclick=\"redoQuiz('ger');\"><span id=\"choice1\">Nein</span></button></div>";
+            break;
+        case "punj":
+            element.innerHTML = "<h1>ਬੇਰੁਜ਼ਗਾਰੀ ਮਿਲਣ ਦਾ ਟੈਸਟ</h1><p id=\"question\">ਤੁਸੀੰ ਕੋਰੋਨਾਵਾਈਰਸ ਤੋਂ ਰਾਹਤ ਚਾਹੁੰਦੇ ਹੋ?</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"covidQuiz('punj');\"><span id=\"choice0\">ਜੀ</span></button><button id=\"btn1\" onclick=\"redoQuiz('punj');\"><span id=\"choice1\">ਨਹੀਂ</span></button></div>";
             break;
         default:
             element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\">Are you seeking relief from COVID-19?</p><div class=\"buttons\"><button id=\"btn0\" onclick=\"covidQuiz();\"><span id=\"choice0\">Yes</span></button><button id=\"btn1\" onclick=\"chooseState();\"><span id=\"choice1\">No</span></button></div>";
@@ -347,6 +401,21 @@ function redoQuiz(lang="en", state="NY", ) {
             quiz = new Quiz(baseViet);
             populate("vi", "not-covid");
             break;
+        case "kor":
+            element.innerHTML = "<h1>실업수당 조건 시험</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
+            quiz = new Quiz(baseKore);
+            populate("kor", "not-covid");
+            break;
+        case "ger":
+            element.innerHTML = "<h1>Qualifikationsprüfung zur Arbeitslosigkeit</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
+            quiz = new Quiz(baseGerm);
+            populate("ger", "not-covid");
+            break;
+        case "punj":
+            element.innerHTML = "<h1>ਬੇਰੁਜ਼ਗਾਰੀ ਮਿਲਣ ਦਾ ਟੈਸਟ</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
+            quiz = new Quiz(baseGerm);
+            populate("punj", "not-covid");
+            break;
         default:
             element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
             uiz = new Quiz(baseViet);
@@ -366,6 +435,21 @@ function covidQuiz(lang="en") {
             element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
             quiz = new Quiz(covid19Viet);
             populate("vi", "covid");
+            break;
+        case "kor":
+            element.innerHTML = "<h1>실업수당 조건 시험</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
+            quiz = new Quiz(covid19);
+            populate("kor", "covid");
+            break;
+        case "ger":
+            element.innerHTML = "<h1>Qualifikationsprüfung zur Arbeitslosigkeit</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
+            quiz = new Quiz(covid19);
+            populate("ger", "covid");
+            break;
+        case "punj":
+            element.innerHTML = "<h1>ਬੇਰੁਜ਼ਗਾਰੀ ਮਿਲਣ ਦਾ ਟੈਸਟ</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
+            quiz = new Quiz(covid19);
+            populate("punj", "covid");
             break;
         default:
             element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
@@ -393,6 +477,15 @@ function results(title, text,lang="en") {
         case "vi":
             gameOverHTML += "<h2 id='score'> "+text+"</h2> <div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
             break;
+        case "kor":
+            gameOverHTML += "<h2 id='score'> "+text+"</h2> <div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">퀴즈 다시 치기</button></center>";
+            break;
+        case "ger":
+            gameOverHTML += "<h2 id='score'> "+text+"</h2> <div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">ਕਵਿਜ਼ ਨੂੰ ਫਿਰ ਲਓ</button></center>";
+            break;
+        case "punj":
+            gameOverHTML += "<h2 id='score'> "+text+"</h2> <div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Bitt nehmen Sie die Prüfung nochmal</button></center>";
+            break;
         default:
             gameOverHTML += "<h2 id='score'> "+text+"</h2> <div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
     }
@@ -410,6 +503,18 @@ function notQualified(lang="en") {
             var gameOverHTML = "<h1>Không chất lượng</h1>";
             gameOverHTML += "<h2 id='score'>Thật không may, bạn không đủ điều kiện để nhận trợ cấp thất nghiệp trong tiểu bang của bạn.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
             break;
+        case "kor":
+            var gameOverHTML = "<h1>조건불충족</h1>";
+            gameOverHTML += "<h2 id='score'>유감스럽게도 귀하는 실업 수당을 받을 수 있는 조건 불충족 입니다.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">퀴즈 다시 치기</button></center>";
+            break;
+        case "ger":
+            var gameOverHTML = "<h1>Nicht berechtigt</h1>";
+            gameOverHTML += "<h2 id='score'>Leider sind Sie nicht berechtigt, Sozialhilfe für Arbeitslosigkeit in Ihrem Bundesstaat zu erhalten.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Bitt nehmen Sie die Prüfung nochmal</button></center>";
+            break;
+        case "punj":
+            var gameOverHTML = "<h1>ਤੁਸੀਂ ਸਰਕਾਰ ਤੋਂ ਬੇਰੁਜ਼ਗਾਰੀ ਦੇ ਲਾਭ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕਰੋਗੇ</h1>";
+            gameOverHTML += "<h2 id='score'>ਤੁਹਾਨੂੰ ਸਰਕਾਰ ਤੋਂ ਬੇਰੁਜ਼ਗਾਰੀ ਦੇ ਲਾਭ ਪ੍ਰਾਪਤ ਨਹੀਂ ਹੋਣਗੇ.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">ਕਵਿਜ਼ ਨੂੰ ਫਿਰ ਲਓ</button></center>";
+            break;
         default:
             var gameOverHTML = "<h1>Not Qualified</h1>";
             gameOverHTML += "<h2 id='score'>Unfortunately, you are not qualified to receive unemployment benefits in your state.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Take the quiz again</button></center>";
@@ -426,7 +531,19 @@ function qualified(lang="en") {
             break;
         case "vi":
             var gameOverHTML = "<h1>Đủ tiêu chuẩn</h1>";
-            gameOverHTML += "<h2 id='score'>Bạn không đủ điều kiện để nhận trợ cấp thất nghiệp trong tiểu bang của bạn. Áp dụng với địa phương của bạn<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
+            gameOverHTML += "<h2 id='score'>Bạn không đủ điều kiện để nhận trợ cấp thất nghiệp trong tiểu bang của bạn. Áp dụng với địa phương của bạn.<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Làm bài kiểm tra một lần nữa</button></center>";
+            break;
+        case "kor":
+            var gameOverHTML = "<h1>조건충족</h1>";
+            gameOverHTML += "<h2 id='score'>귀하는 현제 거주하시는 주에서 실업수당을 받을수 있습니다. 귀하의 주 노동부에 지원하십시오.<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">퀴즈 다시 치기</button></center>";
+            break;
+        case "ger":
+            var gameOverHTML = "<h1>Đủ tiêu chuẩn</h1>";
+            gameOverHTML += "<h2 id='score'>Sie sind zum Erhalten der Sozialhilfe für Arbeitslosigkeit in Ihrem Bundesstaat berechtigt. Bitte bei Ihrem dortigen Arbeitsamt (Department of Labor) darum bewerben.<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">Bitt nehmen Sie die Prüfung nochmal</button></center>";
+            break;
+        case "punj":
+            var gameOverHTML = "<h1>ਤੁਸੀਂ ਸਰਕਾਰ ਤੋਂ ਬੇਰੁਜ਼ਗਾਰੀ ਦੇ ਲਾਭ ਪ੍ਰਾਪਤ ਕਰੋਗੇ</h1>";
+            gameOverHTML += "<h2 id='score'>ਤੁਸੀਂ ਆਪਣੀ ਸਟੇਟ ਦੇ ਬੇਰੁਜ਼ਗਾਰੀ ਦੇ ਲਾਭ ਪ੍ਰਾਪਤ ਕਰਨ ਦੇ ਯੋਗ ਹੋ. ਆਪਣੇ ਸਥਾਨਕ ਲੇਬਰ ਡਿਪਾਰਟਮੈਂਟ ਨਾਲ ਅਪਲਾਈ ਕਰੋ.<a href=\"https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/Find-Unemployment-Benefits.aspx?location=CA&keyword=&persist=true&ajax=0\">Department of Labor</a>.</h2><div class=\"buttons\"><center><button id=\"btn2\" onclick=\"getStarted(); \">ਕਵਿਜ਼ ਨੂੰ ਫਿਰ ਲਓ</button></center>";
             break;
         default:
             var gameOverHTML = "<h1>Qualified</h1>";
