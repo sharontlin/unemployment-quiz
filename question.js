@@ -80,14 +80,14 @@ function chooseLanguage() {
         "<button id=\"btn1\" onclick=\"chooseQuiz('vi');\">" + 
             "<span id=\"choice1\">Tiếng Việt</span>" +
         "</button>" +
-        "<button id=\"btn2\" onclick=\"chooseQuiz();\">" +
+        "<button id=\"btn2\" onclick=\"chooseQuiz('kor');\">" +
             "<span id=\"choice2\">한국어</span>" +
         "</button>" + 
-        "<button id=\"btn3\" onclick=\"chooseQuiz();\">" +
-            "<span id=\"choice3\">ਪੰਜਾਬੀ</span>" +
+        "<button id=\"btn4\" onclick=\"chooseQuiz('ger');\">" +
+            "<span id=\"choice3\">Deutsche</span>" +
         "</button>" + 
-        "<button id=\"btn4\" onclick=\"chooseQuiz();\">" +
-            "<span id=\"choice4\">Deutsche</span>" +
+        "<button id=\"btn3\" onclick=\"chooseQuiz('punj');\">" +
+            "<span id=\"choice4\">ਪੰਜਾਬੀ</span>" +
         "</button>" + 
     "</div>";
 }
