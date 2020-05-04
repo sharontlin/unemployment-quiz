@@ -38,8 +38,6 @@ Quiz.prototype.isEnded = function() {
         var arr = $.map(this.questions, function(value) {
             return [value];
         });
-        console.log(arr);
-        console.log(this.questionIndex);
         return this.questionIndex === arr.length;
     }
     return this.questionIndex === this.questions.length;
@@ -101,7 +99,7 @@ function chooseLanguage() {
 }
  
 function populate(lang = "en", type="not-covid", guess) {
-    if(quiz.isEnded() && !this.getQuestionIndex().isCorrectAnswer(guess)) {
+    if(quiz.isEnded()) {
         if (type === "covid") {
             if (lang === "en"){
                 notQualified(); 
@@ -134,6 +132,9 @@ function populate(lang = "en", type="not-covid", guess) {
         element.innerHTML = quiz.getQuestionIndex().text;
         
         var choices = quiz.getQuestionIndex().choices;
+        if (choices.length < 2) {
+            document.getElementById("btn1").remove();
+        }
         for(var i = 0; i < choices.length; i++) {
             var element = document.getElementById("choice" + i);
             element.innerHTML = choices[i];
@@ -604,14 +605,15 @@ var covid19 = [
     new Question("Did you stop working to quarantine and expect to work after quarantine is over?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the Coronavirus Aid, Relief and Economic Security (CARES) Act, which provides an extra 13 weeks of benefits beyond regular unemployment benefits. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a> and apply for additional benefits]."),
     new Question("Did you stop working due to risk of exposure or to care for a family member?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the Coronavirus Aid, Relief and Economic Security (CARES) Act, which provides an extra 13 weeks of benefits beyond regular unemployment benefits. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a>] and apply for additional benefits."),
     new Question("Did the breadwinner in your household die from COVID-19?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the Coronavirus Aid, Relief and Economic Security (CARES) Act, which provides an extra 13 weeks of benefits beyond regular unemployment benefits. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a>] and apply for additional benefits."),
-    new Question("If you are self-employed, have you experienced loss of business due to COVID-19?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the Coronavirus Aid, Relief and Economic Security (CARES) Act, which provides an extra 13 weeks of benefits beyond regular unemployment benefits and extends benefits to self-employed, freelancers, and independent contractors. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a>] and apply for additional benefits.")
+    new Question("If you are self-employed, have you experienced loss of business due to COVID-19?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the Coronavirus Aid, Relief and Economic Security (CARES) Act, which provides an extra 13 weeks of benefits beyond regular unemployment benefits and extends benefits to self-employed, freelancers, and independent contractors. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a>] and apply for additional benefits."),
+    new Question("Click for your results.", ["Ok"], "Ok", "Qualified", "You may qualify for unemployment under the Coronavirus Aid, Relief and Economic Security (CARES) Act, which provides an extra 13 weeks of benefits beyond regular unemployment benefits and extends benefits to self-employed, freelancers, and independent contractors. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a>] and apply for additional benefits."),
 ];
 
 var base = [
     new Question("Did you involuntarily lose your job, not due to quitting or firing?", ["Yes", "No"], "No", "Not Qualified", "You will need to be reviewed by a claims examiner through a fact-finding interview. Your employer may also be contacted and the examineer will determine your eligibility."),
     new Question("Are you actively seeking employment and are you available for work?", ["Yes", "No"], "No", "Not Qualified", "You must be seeking employment in order to qualify for unemployment benefits."),
-    // new Question("Are you a teacher or school employee?", ["Yes", "No"], "Yes", "Maybe Qualified", "If you have a claimed filed curing a recess period, only school wages in the base period of the claim, or an offer to return to work for a school employer when the recess period ends, you may not be eligibile, although eligibility depends on your unique situation."),
-    // new Question("Are you a corporate officer or business owner?", ["Yes", "No"], "Yes", "Maybe Qualified", "If you own more than a 5 percent equitable (you own more than 5% of the capital stock of the corporation, either by yourself or with your spouse) or debt interest and your claim is based on wages with the corproation, you will not be considered unemployed during your term of office or ownership."),
+    new Question("Are you a teacher or school employee?", ["Yes", "No"], "Yes", "Maybe Qualified", "If you have a claimed filed curing a recess period, only school wages in the base period of the claim, or an offer to return to work for a school employer when the recess period ends, you may not be eligibile, although eligibility depends on your unique situation."),
+    new Question("Click for your results.", ["Ok"], "Ok", "Qualified", "You may qualify for unemployment under the Coronavirus Aid, Relief and Economic Security (CARES) Act, which provides an extra 13 weeks of benefits beyond regular unemployment benefits and extends benefits to self-employed, freelancers, and independent contractors. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a>] and apply for additional benefits."),
     // new Question("Are you self-employed, a part-time worker, or an independent contractor?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the national coronavirus releif act. You should apply for unemployment insurance."),
 ];
 
