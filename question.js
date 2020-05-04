@@ -431,7 +431,7 @@ function redoQuiz(lang="en", state="NY", ) {
             break;
         case "punj":
             element.innerHTML = "<h1>ਬੇਰੁਜ਼ਗਾਰੀ ਮਿਲਣ ਦਾ ਟੈਸਟ</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
-            quiz = new Quiz(baseGerm);
+            quiz = new Quiz(basePunj);
             populate("punj", "not-covid");
             break;
         default:
@@ -456,17 +456,17 @@ function covidQuiz(lang="en") {
             break;
         case "kor":
             element.innerHTML = "<h1>실업수당 조건 시험</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
-            quiz = new Quiz(covid19);
+            quiz = new Quiz(covid19Kore);
             populate("kor", "covid");
             break;
         case "ger":
             element.innerHTML = "<h1>Qualifikationsprüfung zur Arbeitslosigkeit</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
-            quiz = new Quiz(covid19);
+            quiz = new Quiz(covid19Germ);
             populate("ger", "covid");
             break;
         case "punj":
             element.innerHTML = "<h1>ਬੇਰੁਜ਼ਗਾਰੀ ਮਿਲਣ ਦਾ ਟੈਸਟ</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
-            quiz = new Quiz(covid19);
+            quiz = new Quiz(covid19Punj);
             populate("punj", "covid");
             break;
         default:
