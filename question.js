@@ -28,8 +28,8 @@ Quiz.prototype.guess = function(answer, lang = "en") {
 }
 
  
-Quiz.prototype.getQuestions = function() {
-    return this.questions;
+Quiz.prototype.getQuestionLen = function() {
+    return this.questions.length;
 }
 
  
@@ -38,6 +38,8 @@ Quiz.prototype.isEnded = function() {
         var arr = $.map(this.questions, function(value) {
             return [value];
         });
+        console.log(arr);
+        console.log(this.questionIndex);
         return this.questionIndex === arr.length;
     }
     return this.questionIndex === this.questions.length;
@@ -98,8 +100,8 @@ function chooseLanguage() {
     "</div>";
 }
  
-function populate(lang = "en", type="not-covid") {
-    if(quiz.isEnded()) {
+function populate(lang = "en", type="not-covid", guess) {
+    if(quiz.isEnded() && !this.getQuestionIndex().isCorrectAnswer(guess)) {
         if (type === "covid") {
             if (lang === "en"){
                 notQualified(); 
@@ -112,7 +114,7 @@ function populate(lang = "en", type="not-covid") {
             } else if (lang === "punj") {
                 notQualified("punj");
             }
-        } else {
+        } else if (type === "not-covid") {
             if (lang === "en"){
                 qualified(); 
             } else if (lang === "vi") {
@@ -172,53 +174,53 @@ function guess(id, guess, lang="en", type="not-covid") {
             switch(lang) {
                 case "en":
                     quiz.guess(guess, "en", "covid");
-                    populate("en", "covid");                    
+                    populate("en", "covid", guess);                    
                     break;
                 case "vi":
                     quiz.guess(guess,"vi", "covid");
-                    populate("vi", "covid");                      
+                    populate("vi", "covid", guess);                      
                     break;
                 case "kor":
                     quiz.guess(guess,"kor", "covid");
-                    populate("kor", "covid");                      
+                    populate("kor", "covid", guess);                      
                     break;
                 case "ger":
                     quiz.guess(guess,"ger", "covid");
-                    populate("ger", "covid");                      
+                    populate("ger", "covid", guess);                      
                     break;
                 case "punj":
                     quiz.guess(guess,"punj", "covid");
-                    populate("punj", "covid");                      
+                    populate("punj", "covid", guess);                      
                     break;
                 default:
                     quiz.guess(guess, "en", "covid");
-                    populate("en", "covid");            
+                    populate("en", "covid", guess);            
             }
         } else {
             switch(lang) {
                 case "en":
                     quiz.guess(guess, "en", "not-covid");
-                    populate("en", "not-covid");                    
+                    populate("en", "not-covid", guess);                    
                     break;
                 case "vi":
                     quiz.guess(guess,"vi", "not-covid");
-                    populate("vi", "not-covid");                      
+                    populate("vi", "not-covid", guess);                      
                     break;
                 case "kor":
                     quiz.guess(guess,"kor", "not-covid");
-                    populate("kor", "not-covid");                      
+                    populate("kor", "not-covid", guess);                      
                     break;
                 case "ger":
                     quiz.guess(guess,"ger", "not-covid");
-                    populate("ger", "not-covid");                      
+                    populate("ger", "not-covid", guess);                      
                     break;
                 case "punj":
                     quiz.guess(guess,"punj", "not-covid");
-                    populate("punj", "not-covid");                      
+                    populate("punj", "not-covid", guess);                      
                     break;
                 default:
                     quiz.guess(guess, "en", "not-covid");
-                    populate("en", "not-covid");           
+                    populate("en", "not-covid", guess);           
             }
         }
         
@@ -412,32 +414,32 @@ function redoQuiz(lang="en", state="NY", ) {
                 default:
                     quiz = new Quiz(nj);
             } 
-            populate("en", "not-covid");
+            populate("en", "not-covid", guess);
             break;
         case "vi":
             element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
             quiz = new Quiz(baseViet);
-            populate("vi", "not-covid");
+            populate("vi", "not-covid", guess);
             break;
         case "kor":
             element.innerHTML = "<h1>실업수당 조건 시험</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
             quiz = new Quiz(baseKore);
-            populate("kor", "not-covid");
+            populate("kor", "not-covid", guess);
             break;
         case "ger":
             element.innerHTML = "<h1>Qualifikationsprüfung zur Arbeitslosigkeit</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
             quiz = new Quiz(baseGerm);
-            populate("ger", "not-covid");
+            populate("ger", "not-covid", guess);
             break;
         case "punj":
             element.innerHTML = "<h1>ਬੇਰੁਜ਼ਗਾਰੀ ਮਿਲਣ ਦਾ ਟੈਸਟ</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
             quiz = new Quiz(basePunj);
-            populate("punj", "not-covid");
+            populate("punj", "not-covid", guess);
             break;
         default:
             element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
             uiz = new Quiz(baseViet);
-            populate("vi", "not-covid");
+            populate("vi", "not-covid", guess);
     }
 }
 
@@ -447,32 +449,32 @@ function covidQuiz(lang="en") {
         case "en":
             element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
             quiz = new Quiz(covid19);
-            populate("en", "covid");
+            populate("en", "covid", guess);
             break;
         case "vi":
             element.innerHTML = "<h1>Kiểm tra trình độ thất nghiệp</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
             quiz = new Quiz(covid19Viet);
-            populate("vi", "covid");
+            populate("vi", "covid", guess);
             break;
         case "kor":
             element.innerHTML = "<h1>실업수당 조건 시험</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
             quiz = new Quiz(covid19Kore);
-            populate("kor", "covid");
+            populate("kor", "covid", guess);
             break;
         case "ger":
             element.innerHTML = "<h1>Qualifikationsprüfung zur Arbeitslosigkeit</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
             quiz = new Quiz(covid19Germ);
-            populate("ger", "covid");
+            populate("ger", "covid", guess);
             break;
         case "punj":
             element.innerHTML = "<h1>ਬੇਰੁਜ਼ਗਾਰੀ ਮਿਲਣ ਦਾ ਟੈਸਟ</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
             quiz = new Quiz(covid19Punj);
-            populate("punj", "covid");
+            populate("punj", "covid", guess);
             break;
         default:
             element.innerHTML = "<h1>Unemployment Qualification Test</h1><p id=\"question\"></p><div class=\"buttons\"><button id=\"btn0\"><span id=\"choice0\"></span></button><button id=\"btn1\"><span id=\"choice1\"></span></button></div>";
             quiz = new Quiz(covid19);
-            populate("en", "covid");
+            populate("en", "covid", guess);
     }
 }
 
@@ -602,7 +604,7 @@ var covid19 = [
     new Question("Did you stop working to quarantine and expect to work after quarantine is over?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the Coronavirus Aid, Relief and Economic Security (CARES) Act, which provides an extra 13 weeks of benefits beyond regular unemployment benefits. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a> and apply for additional benefits]."),
     new Question("Did you stop working due to risk of exposure or to care for a family member?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the Coronavirus Aid, Relief and Economic Security (CARES) Act, which provides an extra 13 weeks of benefits beyond regular unemployment benefits. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a>] and apply for additional benefits."),
     new Question("Did the breadwinner in your household die from COVID-19?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the Coronavirus Aid, Relief and Economic Security (CARES) Act, which provides an extra 13 weeks of benefits beyond regular unemployment benefits. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a>] and apply for additional benefits."),
-    new Question("If you are self-employed, have you experienced loss of business due to COVID-19?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the Coronavirus Aid, Relief and Economic Security (CARES) Act, which provides an extra 13 weeks of benefits beyond regular unemployment benefits and extends benefits to self-employed, freelancers, and independent contractors. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a>] and apply for additional benefits."),
+    new Question("If you are self-employed, have you experienced loss of business due to COVID-19?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the Coronavirus Aid, Relief and Economic Security (CARES) Act, which provides an extra 13 weeks of benefits beyond regular unemployment benefits and extends benefits to self-employed, freelancers, and independent contractors. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a>] and apply for additional benefits.")
 ];
 
 var base = [
