@@ -140,6 +140,9 @@ a {
 }
 
 @media screen and (max-width: 480px) {
+    .grid-container h2 {
+        font-size: 18px;
+    }
     #quiz h1 {
         font-size: 28px;
     }
