@@ -594,6 +594,59 @@ var base = [
     // new Question("Are you self-employed, a part-time worker, or an independent contractor?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the national coronavirus releif act. You should apply for unemployment insurance."),
 ];
 
+/*
+/
+/ German questions
+/
+*/
+
+var covid19Germ = [
+    new Question("Haben Ihr Arbeitgeber wegen der COVID-19-Pandemie seinen Betrieb aufgehört?", ["Ja", "Nein"], "Ja", "Berechtigt", "Sie sind zum Erhalten der Sozialhilfe für Arbeitslosigkeit in Ihrem Bundesstaat berechtigt. Bitte bei Ihrem dortigen Arbeitsamt (Department of Labor) darum bewerben."),
+    new Question("Ist Ihre Haushaltsernährer in wegen COVID-19 gestorben?", ["Ja", "Nein"], "Ja", "Berechtigt", "Sie sind zum Erhalten der Sozialhilfe für Arbeitslosigkeit in Ihrem Bundesstaat berechtigt. Bitte bei Ihrem dortigen Arbeitsamt (Department of Labor) darum bewerben."),
+    new Question("Hörten Sie das Arbeiten wegen des Risikos der Kontakt mit Krankheitserregern, oder um Sich um einen Familienmitglied zu kümmern, auf?", ["Ja", "Nein"], "Ja", "Sie sind zum Erhalten der Sozialhilfe für Arbeitslosigkeit in Ihrem Bundesstaat berechtigt. Bitte bei Ihrem dortigen Arbeitsamt (Department of Labor) darum bewerben."),
+    new Question("Haben Sie das Arbeiten wegen Quarantäne aufgehört, und vorhaben Sie am Ende der Quarantäne, wieder zu arbeiten?", ["Ja", "Nein"], "Ja", "Berechtigt", "Sie sind zum Erhalten der Sozialhilfe für Arbeitslosigkeit in Ihrem Bundesstaat berechtigt. Bitte bei Ihrem dortigen Arbeitsamt (Department of Labor) darum bewerben."),
+];
+  
+  var baseGerm = [
+    new Question("Haben Sie Ihre Arbeit unwillkürlich verloren, und nicht weil willkürliches Selbstaufhörens oder Entlassens?", ["Ja", "Nein"], "Nein", "Nicht berechtigt", ""),
+    new Question("Suchen Sie aktiv eine Anstellung, und sind Sie auch bereit zum Arbeiten?", ["Ja", "Nein"], "Nein", "Leider sind Sie nicht berechtigt, Sozialhilfe für Arbeitslosigkeit in Ihrem Bundesstaat zu erhalten."),
+];
+
+/*
+/
+/ Korean questions
+/
+*/
+  
+var covid19Kore = [
+    new Question("COVID-19 으로 인한 피해에 대해 복지를 원하십니까?", ["예", "아니요"], "예", "조건충족", "귀하는 현제 거주하시는 주에서 실업수당을 받을수 있습니다. 귀하의 주 노동부에 지원하십시오."),
+    new Question("고용주가 COVID-19 때문에 사업을 중단했나요?", ["예", "아니요"], "예", "조건충족", "귀하는 현제 거주하시는 주에서 실업수당을 받을수 있습니다. 귀하의 주 노동부에 지원하십시오."),
+    new Question("자가격리를 하기위해 현재 직장을 쉬고 있지만, 격리 기간 후 복귀하실 예정인가요?", ["예", "아니요"], "예", "조건충족", "귀하는 현제 거주하시는 주에서 실업수당을 받을수 있습니다. 귀하의 주 노동부에 지원하십시오."),
+    new Question("유행병 전염 위험때문에, 혹은 아픈 가족을 볼보기 위해 직장을 쉬고 계신가요?",  ["예", "아니요"], "예", "조건충족", "귀하는 현제 거주하시는 주에서 실업수당을 받을수 있습니다. 귀하의 주 노동부에 지원하십시오."),
+];
+  
+var baseKore = [
+    new Question("정리해고나 퇴사때문이 아닌 실직을 당하셨습니까?", ["예", "아니요"], "아니요", "조건불충족", "사실 조사 인터뷰를 통해 클레임 심사관의 검토를 받아야합니다. 고용주에게 연락하여 검사관이 자격을 결정합니다."),
+    new Question("귀하는 현재 취직활동을 하고있고, 일을 할수 있습니까?", ["예", "아니요"], "아니요", "조건불충족", "유감스럽게도 귀하는 실업 수당을 받을 수 있는 조건 불충족 입니다"),
+];
+
+/*
+/
+/ Punjabi
+/
+*/
+var covid19Punj = [
+    // new Question("Were you laid off due to COVID-19?", ["Yes", "No"], "Yes", "Qualified", "You may qualify for unemployment under the national coronavirus relief act. You should check your status for your [<a href=\"https://www.irs.gov/newsroom/economic-impact-payments-what-you-need-to-know\">stimulus package</a>]."),
+    new Question("ਕੀ ਤੁਸੀਂ ਕੰਮ ਕਰਨਾ ਬੰਦ ਕਰ ਦਿੱਤਾ ਹੈ ਕੁਆਰੰਟੀਨ ਕਰਨ ਲਈ? ਕੀ ਤੁਸੀਂ ਕੁਆਰੰਟੀਨ ਤੋਂ ਬਾਅਦ ਕੰਮ ਕਰਨ ਦੀ ਉਮੀਦ ਕਰਦੇ ਹੋ?", ["ਜੀ", "ਨਹੀਂ"], "ਜੀ", "ਤੁਸੀਂ ਸਰਕਾਰ ਤੋਂ ਬੇਰੁਜ਼ਗਾਰੀ ਦੇ ਲਾਭ ਪ੍ਰਾਪਤ ਕਰੋਗੇ", "ਤੁਸੀਂ ਰਾਸ਼ਟਰੀ ਕੋਰੋਨਾਵਾਇਰਸ ਰਾਹਤ ਐਕਟ ਅਧੀਨ ਬੇਰੁਜ਼ਗਾਰੀ ਦੇ ਲਾਭ ਪ੍ਰਾਪਤ ਲਈ ਯੋਗ ਹੋ ਸਕਦੇ ਹੋ. ਤੁਹਾਨੂੰ ਆਪਣੇ ਸਟਿਮਯੁਲਸ ਪੈਕੇਜ ਲਈ ਆਪਣੇ ਸਟੈਟਸ ਦੀ ਜਾਂਚ ਕਰਨੀ ਚਾਹੀਦੀ ਹੈ."),
+    new Question("ਕੀ ਤੁਸੀਂ ਕੋਰੋਨਾਵਾਈਰਸ ਦੇ ਖਤਰੇ ਕਾਰਨ ਜਾਂ ਕਿਸੇ ਪਰਿਵਾਰਕ ਮੈਂਬਰ ਦੀ ਦੇਖਭਾਲ ਲਈ ਕੰਮ ਕਰਨਾ ਬੰਦ ਕਰ ਦਿੱਤਾ ਹੈ?", ["ਜੀ", "ਨਹੀਂ"], "ਜੀ", "ਤੁਸੀਂ ਸਰਕਾਰ ਤੋਂ ਬੇਰੁਜ਼ਗਾਰੀ ਦੇ ਲਾਭ ਪ੍ਰਾਪਤ ਕਰੋਗੇ", "ਤੁਸੀਂ ਰਾਸ਼ਟਰੀ ਕੋਰੋਨਾਵਾਇਰਸ ਰਾਹਤ ਐਕਟ ਅਧੀਨ ਬੇਰੁਜ਼ਗਾਰੀ ਦੇ ਲਾਭ ਪ੍ਰਾਪਤ ਲਈ ਯੋਗ ਹੋ ਸਕਦੇ ਹੋ. ਤੁਹਾਨੂੰ ਆਪਣੇ ਸਟਿਮਯੁਲਸ ਪੈਕੇਜ ਲਈ ਆਪਣੇ ਸਟੈਟਸ ਦੀ ਜਾਂਚ ਕਰਨੀ ਚਾਹੀਦੀ ਹੈ."),
+    new Question("ਕੀ ਤੁਹਾਡੇ ਘਰ ਵਿਚ ਪੈਸਾ ਕਮਾਉਣ ਵਾਲੇ ਵਿਅਕਤੀ ਦੀ ਮੌਤ ਹੋ ਗਈ?", ["ਜੀ", "ਨਹੀਂ"], "ਜੀ", "ਤੁਸੀਂ ਸਰਕਾਰ ਤੋਂ ਬੇਰੁਜ਼ਗਾਰੀ ਦੇ ਲਾਭ ਪ੍ਰਾਪਤ ਕਰੋਗੇ", "ਤੁਸੀਂ ਰਾਸ਼ਟਰੀ ਕੋਰੋਨਾਵਾਇਰਸ ਰਾਹਤ ਐਕਟ ਅਧੀਨ ਬੇਰੁਜ਼ਗਾਰੀ ਦੇ ਲਾਭ ਪ੍ਰਾਪਤ ਲਈ ਯੋਗ ਹੋ ਸਕਦੇ ਹੋ. ਤੁਹਾਨੂੰ ਆਪਣੇ ਸਟਿਮਯੁਲਸ ਪੈਕੇਜ ਲਈ ਆਪਣੇ ਸਟੈਟਸ ਦੀ ਜਾਂਚ ਕਰਨੀ ਚਾਹੀਦੀ ਹੈ."),
+];
+
+var basePunj = [
+    new Question("ਕੀ ਤੁਹਾਡਾ ਕੰਮ ਛੁਟ ਗਿਆ ਹੈ ਤੁਹਾਡੀ ਮਰਜ਼ੀ ਤੋਂ ਬਿਨਾ?", ["ਜੀ", "ਨਹੀਂ"], "ਨਹੀਂ", "ਤੁਸੀਂ ਸਰਕਾਰ ਤੋਂ ਬੇਰੁਜ਼ਗਾਰੀ ਦੇ ਲਾਭ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕਰੋਗੇ", "You will need to be reviewed by a claims examiner through a fact-finding interview. Your employer may also be contacted and the examineer will determine your eligibility."),
+    new Question("ਕੀ ਤੁਸੀਂ ਕੰਮ ਦੀ ਭਾਲ ਕਰ ਰਹੇ ਹੋ ਅਤੇ ਕੀ ਤੁਸੀਂ ਕੰਮ ਲਈ ਅਵੈਲੇਬਲ ਹੋ, ਕੰਮ ਕਰ ਸਕਦੇ ਹੋ?", ["ਜੀ", "ਨਹੀਂ"], "ਨਹੀਂ", "ਤੁਸੀਂ ਸਰਕਾਰ ਤੋਂ ਬੇਰੁਜ਼ਗਾਰੀ ਦੇ ਲਾਭ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕਰੋਗੇ", "You must be seeking employment in order to qualify for unemployment benefits."),
+];
+
 var al = $.extend( {}, base );
 var ak = $.extend( {}, base );
 var az = $.extend( {}, base );
